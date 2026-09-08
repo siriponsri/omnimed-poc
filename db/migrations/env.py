@@ -7,6 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.config import load_settings
 from app.database import build_engine
 from app.foundation.models import Base
+from app.patients import models  # noqa: F401
 
 target_metadata = Base.metadata
 

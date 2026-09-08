@@ -25,6 +25,7 @@ from app.database import FOUNDATION_TABLES, build_engine, check_readiness
 from app.foundation.models import Base, DemoIdentity, DemoRole, DemoTenant
 from app.foundation.seed import SeedConflict, fixture_records, seed_demo
 from app.main import create_app
+from app.patients import models  # noqa: F401
 
 pytestmark = pytest.mark.integration
 ROOT = Path(__file__).resolve().parents[3]

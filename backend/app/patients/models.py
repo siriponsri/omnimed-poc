@@ -49,6 +49,7 @@ class Patient(FixtureAudit, Base):
     __table_args__ = (
         ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
         UniqueConstraint("tenant_id", "hn"),
+        UniqueConstraint("tenant_id", "id"),
     )
     id: Mapped[UUID] = mapped_column(primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(nullable=False)

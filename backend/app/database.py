@@ -17,6 +17,8 @@ FOUNDATION_TABLES = (
     "party",
     "patient",
     "patient_identifier",
+    "party_relation",
+    "patient_hn_counter",
 )
 
 

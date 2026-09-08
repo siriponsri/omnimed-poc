@@ -57,6 +57,7 @@ def upgrade():
         *audit(),
         sa.ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
         sa.UniqueConstraint("tenant_id", "hn"),
+        sa.UniqueConstraint("tenant_id", "id"),
     )
     op.create_table(
         "patient_identifier",
