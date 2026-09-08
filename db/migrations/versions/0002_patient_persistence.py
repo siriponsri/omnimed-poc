@@ -33,7 +33,7 @@ def upgrade():
         sa.Column("tenant_id", sa.Uuid(), nullable=False),
         sa.Column("display_name", sa.String(200), nullable=False),
         *audit(),
-        sa.UniqueConstraint("tenant_id", "id"),
+        sa.UniqueConstraint("tenant_id", "id", name="uq_party_tenant_id"),
     )
     op.create_table(
         "party_relation",
@@ -43,9 +43,23 @@ def upgrade():
         sa.Column("related_party_id", sa.Uuid(), nullable=False),
         sa.Column("relation_type", sa.String(40), nullable=False),
         *audit(),
-        sa.ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
-        sa.ForeignKeyConstraint(["tenant_id", "related_party_id"], ["party.tenant_id", "party.id"]),
-        sa.UniqueConstraint("tenant_id", "party_id", "related_party_id", "relation_type"),
+        sa.ForeignKeyConstraint(
+            ["tenant_id", "party_id"],
+            ["party.tenant_id", "party.id"],
+            name="fk_party_relation_party",
+        ),
+        sa.ForeignKeyConstraint(
+            ["tenant_id", "related_party_id"],
+            ["party.tenant_id", "party.id"],
+            name="fk_party_relation_related_party",
+        ),
+        sa.UniqueConstraint(
+            "tenant_id",
+            "party_id",
+            "related_party_id",
+            "relation_type",
+            name="uq_party_relation_identity",
+        ),
     )
     op.create_table(
         "patient",
@@ -56,8 +70,9 @@ def upgrade():
         sa.Column("date_of_birth", sa.DateTime(timezone=True), nullable=False),
         *audit(),
         sa.ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
-        sa.UniqueConstraint("tenant_id", "hn"),
-        sa.UniqueConstraint("tenant_id", "id"),
+        sa.UniqueConstraint("tenant_id", "hn", name="uq_patient_tenant_hn"),
+        sa.UniqueConstraint("tenant_id", "id", name="uq_patient_tenant_id"),
+        sa.UniqueConstraint("tenant_id", "party_id", name="uq_patient_tenant_party"),
     )
     op.create_table(
         "patient_identifier",
@@ -69,7 +84,13 @@ def upgrade():
         sa.Column("is_preferred", sa.Boolean(), nullable=False),
         *audit(),
         sa.ForeignKeyConstraint(["tenant_id", "patient_id"], ["patient.tenant_id", "patient.id"]),
-        sa.UniqueConstraint("tenant_id", "patient_id", "identifier_type", "value"),
+        sa.UniqueConstraint(
+            "tenant_id",
+            "patient_id",
+            "identifier_type",
+            "value",
+            name="uq_patient_identifier_value",
+        ),
     )
     op.execute(
         "CREATE UNIQUE INDEX uq_patient_identifier_preferred ON patient_identifier (tenant_id, patient_id, identifier_type) WHERE is_preferred"

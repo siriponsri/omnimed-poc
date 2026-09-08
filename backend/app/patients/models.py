@@ -24,7 +24,7 @@ class HnCounter(FixtureAudit, Base):
 
 class Party(FixtureAudit, Base):
     __tablename__ = "party"
-    __table_args__ = (UniqueConstraint("tenant_id", "id"),)
+    __table_args__ = (UniqueConstraint("tenant_id", "id", name="uq_party_tenant_id"),)
     id: Mapped[UUID] = mapped_column(primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(nullable=False)
     display_name: Mapped[str] = mapped_column(String(200), nullable=False)
@@ -33,9 +33,23 @@ class Party(FixtureAudit, Base):
 class PartyRelation(FixtureAudit, Base):
     __tablename__ = "party_relation"
     __table_args__ = (
-        ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
-        ForeignKeyConstraint(["tenant_id", "related_party_id"], ["party.tenant_id", "party.id"]),
-        UniqueConstraint("tenant_id", "party_id", "related_party_id", "relation_type"),
+        ForeignKeyConstraint(
+            ["tenant_id", "party_id"],
+            ["party.tenant_id", "party.id"],
+            name="fk_party_relation_party",
+        ),
+        ForeignKeyConstraint(
+            ["tenant_id", "related_party_id"],
+            ["party.tenant_id", "party.id"],
+            name="fk_party_relation_related_party",
+        ),
+        UniqueConstraint(
+            "tenant_id",
+            "party_id",
+            "related_party_id",
+            "relation_type",
+            name="uq_party_relation_identity",
+        ),
     )
     id: Mapped[UUID] = mapped_column(primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(nullable=False)
@@ -48,12 +62,13 @@ class Patient(FixtureAudit, Base):
     __tablename__ = "patient"
     __table_args__ = (
         ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]),
-        UniqueConstraint("tenant_id", "hn"),
-        UniqueConstraint("tenant_id", "id"),
+        UniqueConstraint("tenant_id", "hn", name="uq_patient_tenant_hn"),
+        UniqueConstraint("tenant_id", "id", name="uq_patient_tenant_id"),
+        UniqueConstraint("tenant_id", "party_id", name="uq_patient_tenant_party"),
     )
     id: Mapped[UUID] = mapped_column(primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(nullable=False)
-    party_id: Mapped[UUID] = mapped_column(nullable=False, unique=True)
+    party_id: Mapped[UUID] = mapped_column(nullable=False)
     hn: Mapped[str] = mapped_column(String(32), nullable=False)
     date_of_birth: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
@@ -62,7 +77,13 @@ class PatientIdentifier(FixtureAudit, Base):
     __tablename__ = "patient_identifier"
     __table_args__ = (
         ForeignKeyConstraint(["tenant_id", "patient_id"], ["patient.tenant_id", "patient.id"]),
-        UniqueConstraint("tenant_id", "patient_id", "identifier_type", "value"),
+        UniqueConstraint(
+            "tenant_id",
+            "patient_id",
+            "identifier_type",
+            "value",
+            name="uq_patient_identifier_value",
+        ),
     )
     id: Mapped[UUID] = mapped_column(primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(nullable=False)
