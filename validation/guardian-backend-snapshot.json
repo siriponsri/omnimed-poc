@@ -1,0 +1,38 @@
+{
+  "review": "M0 backend source and existing evidence",
+  "product_code_changed": false,
+  "live_postgresql": "NOT_RUN",
+  "compose_runtime": "NOT_RUN",
+  "code_gate": "PASS_M0_SUBSET",
+  "verification_findings": [
+    "SG-B01"
+  ],
+  "source_sha256": {
+    "backend/app/__init__.py": "69407619235ad7e7f07807933612d68b0511d64b2ca091f68b7d0a23d7d2e1dc",
+    "backend/app/config.py": "3384f0c9a977eb80f2d05c955cfa39b68ddfd51bf08421c29a8a6a68f3740d12",
+    "backend/app/database.py": "7f2c9eab8c747813bc2062525a4bcce623f58bfe22a83f1b8d8afac14d35b026",
+    "backend/app/foundation/__init__.py": "91f4e7d76018756958f33de7b50e3e80129e5edda04bdb50b313088a546f0c63",
+    "backend/app/foundation/catalog.py": "1f985c06d5c6ec5bde5abfa2423ea66a1a712c9f7708ce40107c622e7c4e089e",
+    "backend/app/foundation/models.py": "493028b69362c32d6071ba745c24768a9c82b99b4147c74bc513d503a1fffba6",
+    "backend/app/foundation/seed.py": "6db114f96761ea8bdd0d2a4996ea721f8d53f2ff64cac63c468b409be4c368c8",
+    "backend/app/main.py": "93dbc322ea0328a57bab9de6b127b3b633d0eca334a022cff9f4d11a6efb7816",
+    "backend/tests/integration/test_postgresql.py": "6a248ef7141bfe891746946197f195b411b21500a85fe1da607dcf996bdd813f",
+    "backend/tests/unit/test_config.py": "b59b1bfd8e0a35678ad196a2c745ba777231d6324a337e25d0bd71f4e060d0c3",
+    "backend/tests/unit/test_health.py": "20c3de9d4a05a6ba8508e921afb9486477e8218ef57edfcf801938769fef8b1a",
+    "backend/tests/unit/test_migration_sql.py": "b9281f2bda8d764b9b21219858d74953917ed0ca471e113c034a41f708c0e5db",
+    "backend/tests/unit/test_seed_contract.py": "abe002de55310fe601f41c585ff8015a230054c25aa4fee26f9d17f32d24c6a1",
+    "db/migrations/env.py": "4ad8504afa6d5d13fbc049887b3e8c33f4b804adc720c51d2f4c23bcae2604e9",
+    "db/migrations/versions/0001_foundation.py": "7cb0d8d76815e5e47c61380745fe7e92f783914b5f7254b209cb73eac668f86d",
+    "docker-compose.yml": "64c85f433c991d980834c98de36ec68ae739b230df9190fdfb00f07ccdc6e21f",
+    "backend/Dockerfile": "cb0b856adfac38b58321c40d2f548fbf3cc4088845b25dfa4f8b47b8f6ee35d8",
+    "scripts/dev.py": "9e959a938a653dbc4831be6ed15b3feea1b68ff6099f1b46e5fea1b2f8951f93",
+    "scripts/backend_checks.py": "5577bdd7d10f11e835af1b77a7005e5111d091f3752eb6eac48489e78da3ab0b",
+    "scripts/seed_demo.py": "c5cc6c7eb57400dbdfb63d6daad2255826183b3adc500d8db824db7ce069e61e",
+    "scripts/checks.py": "1f2d29aae6f61747b639a9e652aed682d7749d169acdf2f4be2f4a545344798a",
+    "pyproject.toml": "9ad5c7a020ea501022b47b241d7ad72a8d358ff07e614053abe8a2f9ad76e414",
+    ".env.example": "01babfddfe7e7ae11aa558b2f2f5471dade2ca6c9d0f15cd9f1199a24d89747c",
+    ".dockerignore": "5240808bbb810c2832aaf407f40e111c4b44c9514553bbe4aebdf57ea59fae76",
+    "docs/POC_CONTRACT.md": "73ae01f59cd067386cf53ef0aa5037eadfb4acc16d5553a799e11ef410c38e44",
+    "validation/backend-build.txt": "e6f10eb213e91219948dead4299c48ef33f66f8dba0af1468a841383911e135a"
+  }
+}

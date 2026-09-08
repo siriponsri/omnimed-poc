@@ -1,0 +1,26 @@
+
+> omnimed-poc-frontend@0.1.0 test
+> node --experimental-strip-types --test tests/*.test.ts
+
+TAP version 13
+# Subtest: readiness is fail closed and only accepts the explicit ready response
+ok 1 - readiness is fail closed and only accepts the explicit ready response
+  ---
+  duration_ms: 1.5934
+  type: 'test'
+  ...
+# Subtest: upstream diagnostic/credential fields never reach the browser status response
+ok 2 - upstream diagnostic/credential fields never reach the browser status response
+  ---
+  duration_ms: 0.1652
+  type: 'test'
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 2
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 187.8811

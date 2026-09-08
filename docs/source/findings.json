@@ -1,0 +1,228 @@
+[
+  {
+    "id": "SG-001",
+    "severity": "MEDIUM",
+    "category": "MISSING_INPUT",
+    "affected_milestones": [
+      "M0-docs",
+      "M1",
+      "M3",
+      "M5"
+    ],
+    "source": [
+      "Master §1",
+      "HANDOFF §3",
+      "SRS B0008/B0038–B0042"
+    ],
+    "finding": "ai-agent-routing.zip was not supplied in this turn. Source SRS also references ADR-001, ADR-002, SQT Next Account Architecture v2.3, OmniMed DB Schema v1.0 and Project Plan v1.0; none is available in the attachment set.",
+    "impact": "Cannot claim source-course code reuse, confirmed Next Account adapter contracts, or reconciliation with the historical DB schema.",
+    "recommended_disposition": "Proceed with M0 under explicit master FastAPI/PostgreSQL/modular-monolith defaults; label four-role control plane as derived from master/HANDOFF only. Request referenced materials only before a future task genuinely depends on them. Never block runnable M0 for absent optional routing code.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-002",
+    "severity": "HIGH",
+    "category": "SOURCE_CONTRADICTION",
+    "affected_milestones": [
+      "M3"
+    ],
+    "source": [
+      "BR-CORE-12 B0182",
+      "BR-CLI-02-02 B0608",
+      "US-PHM01-05 B1744"
+    ],
+    "finding": "A revision must set the preceding order status to revoked, while the same rules literally forbid any UPDATE of that order row.",
+    "impact": "A future Order schema cannot satisfy the literal wording in both directions without an explicit interpretation.",
+    "recommended_disposition": "Open ADR before M3: order clinical content is immutable; action=REVISE/DISCONTINUE creates a linked new row; only lifecycle state transition on the predecessor is allowed and preserved in append-only lifecycle history. Alternatively represent derived lifecycle as a projection over immutable events. Root must freeze one approach in the contract. Do not change the source quote.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-003",
+    "severity": "HIGH",
+    "category": "SELECTED_SLICE_GAP",
+    "affected_milestones": [
+      "M3",
+      "M5"
+    ],
+    "source": [
+      "BR-CLI-01-03 B0558",
+      "BR-CLI-01-04 B0558",
+      "VR-CLI-01-03 B0562",
+      "VR-CLI-01-01 B0562",
+      "VR-CLI-01-08 B0562",
+      "Master §3/§10"
+    ],
+    "finding": "SRS encounter completion requires a signed clinical note and exactly one principal diagnosis. The master core demo story does not explicitly include either, and real ICD-10-TM/version and professional-license validation are not established for this POC.",
+    "impact": "A close endpoint triggered only by dispensing or charge creation would silently violate selected SRS workflow.",
+    "recommended_disposition": "Keep completion implementation blocked until root freezes a minimal synthetic note/signature/diagnosis decision or an explicit POC deviation. Prefer a future small manually authored note and unambiguously synthetic diagnosis fixture with mock professional identity; never present synthetic codes/signatures as regulated clinical validity. M0 creates no close endpoint.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-004",
+    "severity": "HIGH",
+    "category": "POC_SCOPE_AMBIGUITY",
+    "affected_milestones": [
+      "M5"
+    ],
+    "source": [
+      "BR-CORE-04 B0157",
+      "BR-FIN-02-06 B2141",
+      "BR-FIN-02-12 B2141",
+      "BR-CORE-19 B0193",
+      "Master mandatory exclusions"
+    ],
+    "finding": "SRS distinguishes discharged from completed, allows completed only after account closure, and also requires nonpaying encounters to close by moving debt into receivables. The selected POC does not define payment, receipt, receivable or Next Account behavior.",
+    "impact": "It is not enough to rename discharged to completed or treat a charge list as paid. The two SRS rules may coexist through a receivable-transfer settlement, but that pathway is not specified for this small demo.",
+    "recommended_disposition": "Freeze one explicitly synthetic account-settlement path before M5 and record its limitations; do not implement real payment/receivable integration. If not selected, keep encounter clinically discharged and completion task blocked rather than counterfeit zero balance.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-005",
+    "severity": "HIGH",
+    "category": "SOURCE_UI_CONFLICT",
+    "affected_milestones": [
+      "M4"
+    ],
+    "source": [
+      "BR-ANC01-11 B0977",
+      "Mockup HTML line 864",
+      "BR-CORE-17 B0193",
+      "SRS event catalog B0222/B0224"
+    ],
+    "finding": "Mockup CBC charge source is labeled ปล่อยผล (ANC-01), while the exact lab rule requires charge at analysis technical_complete, expressly before validation/release.",
+    "impact": "Copying mockup behavior changes charge timing and can duplicate billing when a later result release is handled.",
+    "recommended_disposition": "SRS wins. Plan lab order.fulfilled at technical_complete as the billable clinical event; result.released changes result availability only. Use idempotent source_event_id charge creation and test no additional charge on release/correction. Record this event timing interpretation before M4.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-006",
+    "severity": "MEDIUM",
+    "category": "LAB_SUBSET_ASSUMPTION",
+    "affected_milestones": [
+      "M4"
+    ],
+    "source": [
+      "SRS B0948–B0950",
+      "US-ANC01-05 B0966",
+      "VR-ANC01-07 B0981",
+      "Master role/story list"
+    ],
+    "finding": "SRS defines sample → sample_item → analysis → result working layers and requires separate entry/validation actors except for a configured tenant exception. Master has R-LAB but no R-LAB-SUP and supplies only an Hb result for a CBC example.",
+    "impact": "Directly writing Hb into Observation without traceable performed/released work would bypass LIS semantics; labeling Hb alone as a complete real CBC would overclaim scope.",
+    "recommended_disposition": "Plan minimal synthetic working records and technical_complete → release transitions. Make the single-operator demo exception explicit; label the panel CBC demo (Hb only), with only Hb marked required. No QC engine, analyzer, accession printer, reflex rule or clinical validity claim.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-007",
+    "severity": "MEDIUM",
+    "category": "AUTHORIZED_DEVIATION",
+    "affected_milestones": [
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5"
+    ],
+    "source": [
+      "BR-ROLE-02 B0130",
+      "NFR-S-01/02 B0256",
+      "BR-PLT-01-02 B2905",
+      "Master §5/§13"
+    ],
+    "finding": "Production SRS requires database RLS, field encryption and broader IAM; master explicitly permits a starter with future-RLS schema and local POC auth.",
+    "impact": "An application role selector or application authorization cannot be described as production RLS/PDPA conformance.",
+    "recommended_disposition": "Use explicit PARTIAL_POC/DEFERRED trace rows; M0 has no protected patient read path. Later routes enforce deny-by-default in application services and tested billing projection boundaries. Production security claims remain deferred.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-008",
+    "severity": "MEDIUM",
+    "category": "AUTHORIZED_DEVIATION",
+    "affected_milestones": [
+      "M3",
+      "M4"
+    ],
+    "source": [
+      "US-CLI-02-03 B0600",
+      "US-PHM01-07 B1746",
+      "SRS CLI-02 dependencies B0596",
+      "Master mandatory out-of-scope list"
+    ],
+    "finding": "Selected ordering modules depend on CLI-08 for clinical safety, while master explicitly excludes CDS/clinical AI. Pharmacy source also requires lot/stock operations, which HANDOFF excludes.",
+    "impact": "A narrow order/dispense demo has no validated prescribing decision support or inventory integrity.",
+    "recommended_disposition": "Follow explicit exclusions, constrain to synthetic adult fixed catalog sample, inventory_item_id null, no real-world prescribing or stock claims. Preserve basic structural data validation and manually acknowledged allergy status without adding a CDS engine.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-009",
+    "severity": "MEDIUM",
+    "category": "IDENTITY_AMBIGUITY",
+    "affected_milestones": [
+      "M1"
+    ],
+    "source": [
+      "US-PAT-01-03 B0301",
+      "VR-PAT-01-03/04 B0313",
+      "SRS Party/Patient table B0146"
+    ],
+    "finding": "US-PAT-01-03 combines children and anyone lacking a citizen identifier then requires a guardian, whereas VR-PAT-01-04 makes guardian mandatory only for human age <15 and B0146 describes an adult self relation.",
+    "impact": "The synthetic adult demo intentionally has no real citizen ID; inventing a guardian would distort the identity model.",
+    "recommended_disposition": "Select adult human Party self relation, generated HN as required identifier under VR-PAT-01-03; do not claim the full US-PAT-01-03 flow. Keep child/unknown-identity/guardian workflows deferred; record assumption rather than silently changing source.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-010",
+    "severity": "LOW",
+    "category": "IDENTIFIER_REFERENCE_DRIFT",
+    "affected_milestones": [
+      "M0-docs",
+      "M4"
+    ],
+    "source": [
+      "SC-ANC01-* B0973",
+      "SC-PHM01-* B1751",
+      "Mockup HTML lines 458/742/765"
+    ],
+    "finding": "SRS uses US/BR/VR/SC-ANC01-xx and PHM01/PHM02-xx, but mockup writes SC-ANC-01-xx and SC-PHM-01-xx. Some SRS dependencies also call PLT-01 terminology/master-data or PLT-03 master-data, whereas module headings assign Users/RBAC to PLT-01 and Master Data to PLT-02.",
+    "impact": "Normalizing mockup IDs into the requirement trace would invent SRS IDs; reading dependency labels literally can route work to the wrong platform module.",
+    "recommended_disposition": "Preserve exact SRS definition IDs, cite B#### locators, treat mockup screen identifiers as presentation aliases only. Derive module ownership from actual module headings and open corrections to source separately.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-011",
+    "severity": "LOW",
+    "category": "REFERENCE_ONLY_UI",
+    "affected_milestones": [
+      "M0",
+      "M3"
+    ],
+    "source": [
+      "Mockup HTML lines 206/229/338/749/750",
+      "Master §6"
+    ],
+    "finding": "Mockup contains demonstration KPI numbers, pediatric dose recommendations, and placeholder TMT codes (e.g. TPU 1010xxxx).",
+    "impact": "Copying these values into the starter would violate the master ban on fake metrics/clinical CDS and create misleading reference data.",
+    "recommended_disposition": "Reuse clinical layout/spacing/worklist information architecture only. M0 shows module scope/future workflow labels with no synthetic clinical metrics. Later coding uses expressly synthetic local codes or verified standard codes, never placeholder codes presented as standards.",
+    "m0_blocks_delivery": false
+  },
+  {
+    "id": "SG-012",
+    "severity": "LOW",
+    "category": "ROLE_SEMANTIC_BOUNDARY",
+    "affected_milestones": [
+      "M0",
+      "M5"
+    ],
+    "source": [
+      "Role table B0129",
+      "BR-PLT-01-01 B2905",
+      "BR-FIN-01-12 B2088",
+      "Mockup role/navigation arrays"
+    ],
+    "finding": "R-ADM (admission officer) and R-ADMIN (system administrator) are different source roles. SRS requires support-role clinical denial to outrank any additional allowed clinical role.",
+    "impact": "A permission union or aliasing R-ADM to R-ADMIN can expose clinical content to support/admin users.",
+    "recommended_disposition": "Seed exactly seven master roles; retain exact IDs. Keep R-ADM out of this OPD starter. Future policy uses explicit deny precedence, tested with mixed-role users as well as ordinary Finance/Admin users.",
+    "m0_blocks_delivery": false
+  }
+]

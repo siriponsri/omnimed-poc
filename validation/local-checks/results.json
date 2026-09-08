@@ -1,0 +1,133 @@
+[
+  {
+    "gate": "backend",
+    "status": "PASS",
+    "command": [
+      "C:\\Users\\Siripon Sri\\AppData\\Local\\hermes\\bin\\uv.EXE",
+      "run",
+      "--frozen",
+      "python",
+      "scripts/backend_checks.py"
+    ],
+    "exit_code": 0,
+    "seconds": 5.42,
+    "evidence": "validation/local-checks/backend.txt"
+  },
+  {
+    "gate": "frontend-lint",
+    "status": "PASS",
+    "command": [
+      "C:\\nvm4w\\nodejs\\npm.CMD",
+      "run",
+      "lint"
+    ],
+    "exit_code": 0,
+    "seconds": 7.19,
+    "evidence": "validation/local-checks/frontend-lint.txt"
+  },
+  {
+    "gate": "frontend-typecheck",
+    "status": "PASS",
+    "command": [
+      "C:\\nvm4w\\nodejs\\npm.CMD",
+      "run",
+      "typecheck"
+    ],
+    "exit_code": 0,
+    "seconds": 1.74,
+    "evidence": "validation/local-checks/frontend-typecheck.txt"
+  },
+  {
+    "gate": "frontend-unit",
+    "status": "PASS",
+    "command": [
+      "C:\\nvm4w\\nodejs\\npm.CMD",
+      "test"
+    ],
+    "exit_code": 0,
+    "seconds": 0.88,
+    "evidence": "validation/local-checks/frontend-unit.txt"
+  },
+  {
+    "gate": "frontend-build",
+    "status": "PASS",
+    "command": [
+      "C:\\nvm4w\\nodejs\\npm.CMD",
+      "run",
+      "build"
+    ],
+    "exit_code": 0,
+    "seconds": 60.23,
+    "evidence": "validation/local-checks/frontend-build.txt"
+  },
+  {
+    "gate": "control-plane",
+    "status": "PASS",
+    "command": [
+      "C:\\Users\\Siripon Sri\\AppData\\Local\\hermes\\bin\\uv.EXE",
+      "run",
+      "--frozen",
+      "pytest",
+      "tests/tooling",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 1.02,
+    "evidence": "validation/local-checks/control-plane.txt"
+  },
+  {
+    "gate": "tooling-lint",
+    "status": "PASS",
+    "command": [
+      "C:\\Users\\Siripon Sri\\AppData\\Local\\hermes\\bin\\uv.EXE",
+      "run",
+      "--frozen",
+      "ruff",
+      "check",
+      "scripts",
+      "tests/tooling"
+    ],
+    "exit_code": 0,
+    "seconds": 0.14,
+    "evidence": "validation/local-checks/tooling-lint.txt"
+  },
+  {
+    "gate": "tooling-format",
+    "status": "PASS",
+    "command": [
+      "C:\\Users\\Siripon Sri\\AppData\\Local\\hermes\\bin\\uv.EXE",
+      "run",
+      "--frozen",
+      "ruff",
+      "format",
+      "--check",
+      "scripts",
+      "tests/tooling"
+    ],
+    "exit_code": 0,
+    "seconds": 0.27,
+    "evidence": "validation/local-checks/tooling-format.txt"
+  },
+  {
+    "gate": "trace-and-package",
+    "status": "PASS",
+    "command": [
+      "c:\\Users\\Siripon Sri\\Desktop\\My Project\\omnimed\\.venv\\Scripts\\python.exe",
+      "scripts/repository_check.py"
+    ],
+    "exit_code": 0,
+    "seconds": 9.95,
+    "evidence": "validation/local-checks/trace-and-package.txt"
+  },
+  {
+    "gate": "compose-runtime-postgres-browser",
+    "status": "PASS",
+    "command": [
+      "c:\\Users\\Siripon Sri\\Desktop\\My Project\\omnimed\\.venv\\Scripts\\python.exe",
+      "scripts/compose_smoke.py"
+    ],
+    "exit_code": 0,
+    "seconds": 49.09,
+    "evidence": "validation/local-checks/compose-runtime-postgres-browser.txt"
+  }
+]

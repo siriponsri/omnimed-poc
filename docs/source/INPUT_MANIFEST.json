@@ -1,0 +1,30 @@
+{
+  "inputs": [
+    {
+      "name": "GPT_WORK_MASTER_PROMPT_TH(1).md",
+      "bytes": 28664,
+      "sha256": "6ad32becaa045b706788db22563227e2e1dc0d7cd71e6aa46e70bce4c534dc94"
+    },
+    {
+      "name": "HANDOFF(1).md",
+      "bytes": 10786,
+      "sha256": "7cf39b7e2dbef684db08f30acc1807479aed5ac8446ca9299f9aa5afd622e404"
+    },
+    {
+      "name": "OmniMed_UI_Mockup_v2.0.zip",
+      "bytes": 48278,
+      "sha256": "cf406dcf844f26f26b27aa963cded3e501b4d1695a617f5df063cbb8d39b60df"
+    },
+    {
+      "name": "OmniMed_SRS_v2.0.docx",
+      "bytes": 1816504,
+      "sha256": "b9e96f75e642c6a2f06016e1b90a78e8cbcb1d51c93a0ac996a8b83f733724d7"
+    },
+    {
+      "name": "ai-agent-routing.zip",
+      "bytes": 9958978,
+      "sha256": "5154b19a90cf42a47cf5819ae5bd09435d09dc42ebe61e17b5a75e8f5c647b56"
+    }
+  ],
+  "note": "Original binary sources remain user inputs; selected private review excerpts included for task handoff."
+}

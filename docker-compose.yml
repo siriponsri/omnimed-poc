@@ -1,0 +1,67 @@
+name: omnimed-poc
+services:
+  db:
+    image: postgres:17.11-bookworm
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-omnimed}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/dev.py init first}
+      POSTGRES_DB: ${POSTGRES_DB:-omnimed_demo}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - omnimed_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment: &backend_environment
+      APP_ENV: ${APP_ENV:-local}
+      SYNTHETIC_DEMO_ONLY: "true"
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-omnimed}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-omnimed_demo}
+    command: ["alembic", "-c", "db/alembic.ini", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+  seed:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment: *backend_environment
+    command: ["python", "scripts/seed_demo.py"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment: *backend_environment
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+    restart: unless-stopped
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    environment:
+      API_INTERNAL_URL: http://backend:8000
+      NEXT_TELEMETRY_DISABLED: "1"
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  omnimed_data:

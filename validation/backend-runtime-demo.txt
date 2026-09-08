@@ -1,0 +1,6 @@
+Command: APP_ENV=demo SYNTHETIC_DEMO_ONLY=true PORT=<ephemeral> DATABASE_URL=<synthetic unreachable localhost target> uv run --frozen python scripts/start_backend.py
+Scope: actual Uvicorn process and DB outage path only; live PostgreSQL ready=200 NOT_RUN.
+GET /api/health/live: 200 {"status": "alive", "service": "omnimed-api"}
+GET /api/health/ready: 503 {"status": "not_ready", "database": "unavailable", "schema": "unknown"}
+GET /api/foundation: 200; roles=7; authentication/clinical/access-grants=false
+PASS: demo launcher/PORT and sanitized outage responses; no Docker/real DB proof.

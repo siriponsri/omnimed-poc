@@ -1,0 +1,60 @@
+[project]
+name = "omnimed-poc"
+version = "0.1.0"
+description = "Local, synthetic-data HIS foundation; M0 only"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "alembic==1.19.2",
+  "fastapi==0.141.1",
+  "pydantic==2.13.5",
+  "psycopg[binary]==3.3.5",
+  "sqlalchemy==2.0.52",
+  "uvicorn==0.52.4",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx==0.28.1",
+  "mypy==2.3.1",
+  "pytest==9.1.1",
+  "ruff==0.16.6",
+]
+
+[build-system]
+requires = ["hatchling==1.32.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend/app"]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+pythonpath = ["backend", "."]
+addopts = "--strict-markers --strict-config"
+markers = ["integration: requires explicit disposable PostgreSQL test database"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["frontend", "source-review"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "S"]
+ignore = ["S101"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.ruff.lint.per-file-ignores]
+"backend/tests/**" = ["S105", "S106"]
+# Tooling invokes repository-owned command arrays, never user/model shell strings.
+"scripts/*.py" = ["S603"]
+# Local-only urllib probes are bounded and use fixed/ephemeral loopback URLs.
+"scripts/dev.py" = ["S310", "S603"]
+"scripts/compose_smoke.py" = ["S310", "S603"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["app"]
+mypy_path = "backend"

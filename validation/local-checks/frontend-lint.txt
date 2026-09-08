@@ -1,0 +1,4 @@
+
+> omnimed-poc-frontend@0.1.0 lint
+> eslint app lib tests
+

@@ -1,0 +1,210 @@
+[
+  {
+    "id": "M0-01",
+    "title": "Verify authoritative Compose runtime",
+    "depends_on": [],
+    "status": "BLOCKED_ENVIRONMENT",
+    "path": "docs/tasks/M0-01.md"
+  },
+  {
+    "id": "M1-01",
+    "title": "Party, Patient and identifier schema",
+    "depends_on": [
+      "M0-01"
+    ],
+    "status": "READY_AFTER_DEPENDENCIES",
+    "path": "docs/tasks/M1-01.md"
+  },
+  {
+    "id": "M1-02",
+    "title": "Local authorization and read-audit baseline",
+    "depends_on": [
+      "M1-01"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M1-02.md"
+  },
+  {
+    "id": "M1-03",
+    "title": "Patient registration and search",
+    "depends_on": [
+      "M1-02"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M1-03.md"
+  },
+  {
+    "id": "M1-04",
+    "title": "OPD encounter create and read",
+    "depends_on": [
+      "M1-03"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M1-04.md"
+  },
+  {
+    "id": "M2-01",
+    "title": "Observation definitions and values",
+    "depends_on": [
+      "M1-04"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M2-01.md"
+  },
+  {
+    "id": "M2-02",
+    "title": "Triage capture and workflow",
+    "depends_on": [
+      "M2-01"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M2-02.md"
+  },
+  {
+    "id": "M2-03",
+    "title": "Doctor arrival and allergy acknowledgement",
+    "depends_on": [
+      "M2-02"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M2-03.md"
+  },
+  {
+    "id": "M3-00",
+    "title": "Resolve order revision interpretation",
+    "depends_on": [
+      "M2-03"
+    ],
+    "status": "BLOCKED_AMBIGUITY",
+    "path": "docs/tasks/M3-00.md"
+  },
+  {
+    "id": "M3-01",
+    "title": "Active catalog and encounter-linked orders",
+    "depends_on": [
+      "M3-00"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M3-01.md"
+  },
+  {
+    "id": "M3-02",
+    "title": "Order history and transactional outbox",
+    "depends_on": [
+      "M3-01"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M3-02.md"
+  },
+  {
+    "id": "M3-03",
+    "title": "Doctor CPOE workspace",
+    "depends_on": [
+      "M3-02"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M3-03.md"
+  },
+  {
+    "id": "M4-00",
+    "title": "Freeze lab subset and validation permission",
+    "depends_on": [
+      "M3-03"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M4-00.md"
+  },
+  {
+    "id": "M4-01",
+    "title": "Lab worklist and technical completion",
+    "depends_on": [
+      "M4-00"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M4-01.md"
+  },
+  {
+    "id": "M4-02",
+    "title": "Validate and release Hb Observation",
+    "depends_on": [
+      "M4-01"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M4-02.md"
+  },
+  {
+    "id": "M4-03",
+    "title": "Pharmacy dispense workflow",
+    "depends_on": [
+      "M3-03"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M4-03.md"
+  },
+  {
+    "id": "M4-04",
+    "title": "Event-derived charge and finance projection",
+    "depends_on": [
+      "M4-02",
+      "M4-03"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M4-04.md"
+  },
+  {
+    "id": "M5-00",
+    "title": "Resolve clinical and account completion scope",
+    "depends_on": [
+      "M4-04"
+    ],
+    "status": "BLOCKED_AMBIGUITY",
+    "path": "docs/tasks/M5-00.md"
+  },
+  {
+    "id": "M5-01",
+    "title": "Complete role and tenant boundary suite",
+    "depends_on": [
+      "M4-04"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M5-01.md"
+  },
+  {
+    "id": "M5-02",
+    "title": "Audit evidence and disclosure boundaries",
+    "depends_on": [
+      "M5-01"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M5-02.md"
+  },
+  {
+    "id": "M5-03",
+    "title": "Accepted encounter completion path",
+    "depends_on": [
+      "M5-00",
+      "M5-02"
+    ],
+    "status": "PLANNED_BLOCKED_BY_DECISION",
+    "path": "docs/tasks/M5-03.md"
+  },
+  {
+    "id": "M5-04",
+    "title": "Minimal FHIR R4 read/export adapter",
+    "depends_on": [
+      "M5-02"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M5-04.md"
+  },
+  {
+    "id": "M5-05",
+    "title": "Seeded journey and final acceptance",
+    "depends_on": [
+      "M5-03",
+      "M5-04"
+    ],
+    "status": "PLANNED",
+    "path": "docs/tasks/M5-05.md"
+  }
+]

@@ -1,0 +1,20 @@
+version: 1
+execution_mode: manual_stage_gated
+provider:
+  kind: mock
+  openrouter_enabled: false
+  api_key_env: OPENROUTER_API_KEY
+  allow_network: false
+  allowed_model_ids: []
+  fallback_allowed: false
+routing:
+  orchestrator: {class: high_reasoning}
+  builder: {class: coding}
+  srs_guardian: {class: low_cost_reasoning, read_only: true}
+  reviewer: {class: medium_reasoning, read_only: true}
+budget:
+  normal_repair_loops: 2
+  hard_blocker_repair_loops: 3
+  live_api_usd: 0
+  per_call_timeout_seconds: 90
+  task_context: [AGENTS.md, docs/POC_CONTRACT.md, .ai/TASK_TEMPLATE.md, current_task, selected_excerpts, changed_files]

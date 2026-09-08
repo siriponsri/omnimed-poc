@@ -1,0 +1,49 @@
+name: Local foundation gates
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.20.0'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.11.33'
+      - name: Install backend
+        run: uv sync --frozen --extra dev
+      - name: Install frontend
+        working-directory: frontend
+        run: npm ci
+      - name: Install Chromium
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+      - name: Full local gate including disposable Compose and PostgreSQL
+        run: python scripts/checks.py --full
+      - name: Check optional Railway config offline
+        working-directory: .railway
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+      - name: Retain gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: foundation-validation
+          path: |
+            validation/local-checks
+            frontend/test-results
+          retention-days: 7

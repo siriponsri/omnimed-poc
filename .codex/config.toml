@@ -1,0 +1,36 @@
+# .codex/config.toml
+#
+# OmniMed project-local Codex configuration.
+# Product/runtime policy remains authoritative in AGENTS.md.
+
+model_reasoning_effort = "medium"
+plan_mode_reasoning_effort = "high"
+model_reasoning_summary = "auto"
+model_verbosity = "medium"
+
+web_search = "cached"
+
+[features]
+multi_agent = true
+
+[agents]
+max_threads = 3
+max_depth = 1
+job_max_runtime_seconds = 1800
+
+[agents.srs_guardian]
+description = """
+Read-only OmniMed SRS/POC compliance reviewer.
+Checks the current candidate against the selected SRS excerpts,
+POC contract, task contract, requirement trace and AGENTS.md.
+Must never modify product code.
+"""
+config_file = "agents/srs-guardian.toml"
+
+[agents.reviewer]
+description = """
+Independent read-only reviewer for correctness, security,
+migration safety, test adequacy, accidental complexity and scope drift.
+Runs only after deterministic gates.
+"""
+config_file = "agents/reviewer.toml"

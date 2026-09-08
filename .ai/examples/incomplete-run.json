@@ -1,0 +1,23 @@
+{
+  "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "gates": {
+    "test": "PASS",
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "migration": "PASS"
+  },
+  "guardian": {
+    "verdict": "UNCERTAIN",
+    "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "evidence": "offline-example",
+    "source": "mock"
+  },
+  "reviewer": {
+    "verdict": "UNCERTAIN",
+    "candidate_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "evidence": "offline-example",
+    "source": "mock"
+  },
+  "repairs_used": 0
+}
