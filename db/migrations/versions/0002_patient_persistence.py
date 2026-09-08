@@ -1,4 +1,4 @@
-"""Party, patient and tenant scoped identifiers."""  # noqa: E501
+"""Party, patient and tenant scoped identifiers."""
 # ruff: noqa: E501, E702
 
 import sqlalchemy as sa

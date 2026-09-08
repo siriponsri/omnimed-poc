@@ -35,3 +35,6 @@ erDiagram
 ทุก patient-bearing table ต้องมี tenant_id, created_at/by, updated_at/by. Cross-tenant FKs must be prevented with composite keys/constraints or equally tested mechanism. Actor IDs must be server-derived after auth; values supplied by browser are not audit identity
 
 Money uses Decimal/Numeric, UTC-aware timestamps use PostgreSQL timestamptz. Clinical record correction creates revision/entered_in_error history; no delete routes. Schema migration is task-owned, not auto-created on API startup. Clinical columns in Encounter, separate ad-hoc prescription table and JSONB that hides reportable clinical measurements violate selected core rules
+# M1-01 patient persistence
+
+`party` owns person identity; `patient` references Party through a tenant-scoped composite foreign key. `party_relation` stores explicit self relations. `patient_identifier` enforces one preferred value per type. HN values are allocated from a tenant counter and are never reused.

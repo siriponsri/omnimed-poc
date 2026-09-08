@@ -11,6 +11,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.foundation.models import Base, FixtureAudit
+
 # ruff: noqa: E501
 
 
