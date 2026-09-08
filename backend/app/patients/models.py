@@ -5,9 +5,9 @@ from sqlalchemy import (
     Boolean,
     DateTime,
     ForeignKeyConstraint,
+    Index,
     String,
     UniqueConstraint,
-    Index,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -98,6 +98,6 @@ class PatientIdentifier(FixtureAudit, Base):
             "patient_id",
             "identifier_type",
             unique=True,
-            postgresql_where=(is_preferred == True),
+            postgresql_where=is_preferred,
         ),  # noqa: E712
     )
