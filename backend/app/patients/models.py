@@ -7,6 +7,7 @@ from sqlalchemy import (
     ForeignKeyConstraint,
     String,
     UniqueConstraint,
+    Index,
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -75,6 +76,13 @@ class Patient(FixtureAudit, Base):
 
 class PatientIdentifier(FixtureAudit, Base):
     __tablename__ = "patient_identifier"
+    id: Mapped[UUID] = mapped_column(primary_key=True)
+    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
+    patient_id: Mapped[UUID] = mapped_column(nullable=False)
+    identifier_type: Mapped[str] = mapped_column(String(40), nullable=False)
+    value: Mapped[str] = mapped_column(String(120), nullable=False)
+    is_preferred: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+
     __table_args__ = (
         ForeignKeyConstraint(["tenant_id", "patient_id"], ["patient.tenant_id", "patient.id"]),
         UniqueConstraint(
@@ -84,10 +92,12 @@ class PatientIdentifier(FixtureAudit, Base):
             "value",
             name="uq_patient_identifier_value",
         ),
+        Index(
+            "uq_patient_identifier_preferred",
+            "tenant_id",
+            "patient_id",
+            "identifier_type",
+            unique=True,
+            postgresql_where=(is_preferred == True),
+        ),  # noqa: E712
     )
-    id: Mapped[UUID] = mapped_column(primary_key=True)
-    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
-    patient_id: Mapped[UUID] = mapped_column(nullable=False)
-    identifier_type: Mapped[str] = mapped_column(String(40), nullable=False)
-    value: Mapped[str] = mapped_column(String(120), nullable=False)
-    is_preferred: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
