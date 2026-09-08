@@ -1,0 +1,46 @@
+from datetime import datetime
+from uuid import UUID
+from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKeyConstraint, String, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column
+from app.foundation.models import Base, FixtureAudit
+
+class HnCounter(FixtureAudit, Base):
+    __tablename__ = "patient_hn_counter"
+    __table_args__ = (ForeignKeyConstraint(["tenant_id"], ["foundation_tenant.id"]),)
+    tenant_id: Mapped[UUID] = mapped_column(primary_key=True)
+    next_value: Mapped[int] = mapped_column(nullable=False, default=1)
+
+class Party(FixtureAudit, Base):
+    __tablename__ = "party"
+    __table_args__ = (UniqueConstraint("tenant_id", "id"),)
+    id: Mapped[UUID] = mapped_column(primary_key=True)
+    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
+    display_name: Mapped[str] = mapped_column(String(200), nullable=False)
+
+class PartyRelation(FixtureAudit, Base):
+    __tablename__ = "party_relation"
+    __table_args__ = (ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]), ForeignKeyConstraint(["tenant_id", "related_party_id"], ["party.tenant_id", "party.id"]), UniqueConstraint("tenant_id", "party_id", "related_party_id", "relation_type"))
+    id: Mapped[UUID] = mapped_column(primary_key=True)
+    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
+    party_id: Mapped[UUID] = mapped_column(nullable=False)
+    related_party_id: Mapped[UUID] = mapped_column(nullable=False)
+    relation_type: Mapped[str] = mapped_column(String(40), nullable=False)
+
+class Patient(FixtureAudit, Base):
+    __tablename__ = "patient"
+    __table_args__ = (ForeignKeyConstraint(["tenant_id", "party_id"], ["party.tenant_id", "party.id"]), UniqueConstraint("tenant_id", "hn"))
+    id: Mapped[UUID] = mapped_column(primary_key=True)
+    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
+    party_id: Mapped[UUID] = mapped_column(nullable=False, unique=True)
+    hn: Mapped[str] = mapped_column(String(32), nullable=False)
+    date_of_birth: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+
+class PatientIdentifier(FixtureAudit, Base):
+    __tablename__ = "patient_identifier"
+    __table_args__ = (ForeignKeyConstraint(["tenant_id", "patient_id"], ["patient.tenant_id", "patient.id"]), UniqueConstraint("tenant_id", "patient_id", "identifier_type", "value"))
+    id: Mapped[UUID] = mapped_column(primary_key=True)
+    tenant_id: Mapped[UUID] = mapped_column(nullable=False)
+    patient_id: Mapped[UUID] = mapped_column(nullable=False)
+    identifier_type: Mapped[str] = mapped_column(String(40), nullable=False)
+    value: Mapped[str] = mapped_column(String(120), nullable=False)
+    is_preferred: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
