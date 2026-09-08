@@ -3,215 +3,233 @@ Building and starting disposable Compose project
 #1 reading from stdin 2.17kB done
 #1 DONE 0.0s
 
-#2 [seed internal] load build definition from Dockerfile
-#2 transferring dockerfile: 950B 0.1s done
-#2 DONE 0.1s
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 873B 0.0s done
+#2 DONE 0.0s
 
-#3 [frontend internal] load build definition from Dockerfile
-#3 transferring dockerfile: 873B 0.0s done
-#3 DONE 0.1s
+#3 [seed internal] load build definition from Dockerfile
+#3 transferring dockerfile: 950B 0.0s done
+#3 DONE 0.0s
 
-#4 [frontend internal] load metadata for docker.io/library/node:24.20.0-bookworm-slim
+#4 [backend internal] load metadata for docker.io/library/python:3.12.13-slim-bookworm
 #4 ...
 
-#5 [seed internal] load metadata for ghcr.io/astral-sh/uv:0.11.33
-#5 DONE 2.6s
+#5 [backend internal] load metadata for ghcr.io/astral-sh/uv:0.11.33
+#5 DONE 1.6s
 
-#6 [seed internal] load metadata for docker.io/library/python:3.12.13-slim-bookworm
-#6 DONE 4.7s
+#6 [frontend internal] load metadata for docker.io/library/node:24.20.0-bookworm-slim
+#6 DONE 1.9s
+
+#4 [seed internal] load metadata for docker.io/library/python:3.12.13-slim-bookworm
+#4 DONE 1.9s
 
 #7 [backend internal] load .dockerignore
 #7 transferring context: 236B 0.0s done
 #7 DONE 0.0s
 
-#8 [seed internal] load build context
+#8 [backend stage-0 1/9] FROM docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
+#8 resolve docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 0.0s done
 #8 DONE 0.0s
 
-#9 [seed stage-0 1/9] FROM docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
-#9 resolve docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 0.0s done
+#9 [backend] FROM ghcr.io/astral-sh/uv:0.11.33@sha256:77280f2f771df71f90786c314fe1bbc1e023feac652969bbf139c280babf2eb7
+#9 resolve ghcr.io/astral-sh/uv:0.11.33@sha256:77280f2f771df71f90786c314fe1bbc1e023feac652969bbf139c280babf2eb7 0.0s done
 #9 DONE 0.0s
 
-#10 [seed] FROM ghcr.io/astral-sh/uv:0.11.33@sha256:77280f2f771df71f90786c314fe1bbc1e023feac652969bbf139c280babf2eb7
-#10 resolve ghcr.io/astral-sh/uv:0.11.33@sha256:77280f2f771df71f90786c314fe1bbc1e023feac652969bbf139c280babf2eb7
-#10 resolve ghcr.io/astral-sh/uv:0.11.33@sha256:77280f2f771df71f90786c314fe1bbc1e023feac652969bbf139c280babf2eb7 0.0s done
+#10 [frontend dependencies 1/4] FROM docker.io/library/node:24.20.0-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e
+#10 resolve docker.io/library/node:24.20.0-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e 0.0s done
 #10 DONE 0.0s
 
-#9 [migrate stage-0 1/9] FROM docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
-#9 resolve docker.io/library/python:3.12.13-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 0.0s done
-#9 DONE 0.0s
+#11 [backend internal] load build context
+#11 transferring context: 124.01kB 0.0s done
+#11 transferring context: 124.01kB 0.0s done
+#11 DONE 0.0s
 
-#8 [backend internal] load build context
-#8 transferring context: 1.50kB done
-#8 DONE 0.1s
-
-#11 [seed stage-0 8/9] COPY scripts/start_backend.py ./scripts/start_backend.py
-#11 CACHED
-
-#12 [seed stage-0 4/9] COPY pyproject.toml uv.lock ./
+#12 [backend stage-0 3/9] WORKDIR /app
 #12 CACHED
 
-#13 [seed stage-0 5/9] COPY backend ./backend
+#13 [backend stage-0 2/9] COPY --from=ghcr.io/astral-sh/uv:0.11.33 /uv /uvx /bin/
 #13 CACHED
 
-#14 [seed stage-0 6/9] COPY db ./db
+#14 [backend stage-0 4/9] COPY pyproject.toml uv.lock ./
 #14 CACHED
 
-#15 [seed stage-0 7/9] COPY scripts/seed_demo.py ./scripts/seed_demo.py
-#15 CACHED
+#15 [frontend internal] load build context
+#15 transferring context: 254.12kB 0.0s done
+#15 DONE 0.0s
 
-#16 [seed stage-0 2/9] COPY --from=ghcr.io/astral-sh/uv:0.11.33 /uv /uvx /bin/
+#16 [frontend builder 1/2] COPY frontend/ ./
 #16 CACHED
 
-#17 [seed stage-0 3/9] WORKDIR /app
+#17 [frontend dependencies 3/4] COPY frontend/package.json frontend/package-lock.json ./
 #17 CACHED
 
-#18 [seed stage-0 9/9] RUN uv sync --frozen --no-dev --no-editable     && groupadd --gid 10001 omnimed     && useradd --uid 10001 --gid omnimed --no-create-home omnimed     && chown -R omnimed:omnimed /app
+#18 [frontend runner 3/5] COPY --from=builder --chown=node:node /app/.next/standalone ./
 #18 CACHED
 
-#19 [seed] exporting to image
-#19 exporting layers done
-#19 exporting manifest sha256:686a051a76d7bee7ad60e16524da7b2e4afe361d61e52527b2aab2d4d9e2fece 0.1s done
-#19 exporting config sha256:61e7a4f567a0947bc356b8269ce56777ef368b214cde6a4eb0f9dc9f7774b179
-#19 exporting config sha256:61e7a4f567a0947bc356b8269ce56777ef368b214cde6a4eb0f9dc9f7774b179 0.1s done
-#19 exporting attestation manifest sha256:e8a2428f784461823fb258ac7c39d7461d62e5be9bf8d8c929907d79e3ae062d
-#19 exporting attestation manifest sha256:e8a2428f784461823fb258ac7c39d7461d62e5be9bf8d8c929907d79e3ae062d 0.2s done
-#19 exporting manifest list sha256:2d134d6bf48aa8f4403c2e9bfc793a280cfc5f9458aabef707cc0f5610c0ced2
-#19 ...
+#19 [frontend builder 2/2] RUN npm run build
+#19 CACHED
 
-#7 [frontend internal] load .dockerignore
-#7 transferring context: 236B 0.0s done
-#7 DONE 0.0s
+#20 [frontend dependencies 4/4] RUN npm ci --no-audit --no-fund
+#20 CACHED
 
-#4 [frontend internal] load metadata for docker.io/library/node:24.20.0-bookworm-slim
-#4 DONE 5.5s
+#21 [frontend runner 4/5] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+#21 CACHED
 
-#20 [frontend dependencies 1/4] FROM docker.io/library/node:24.20.0-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e
-#20 resolve docker.io/library/node:24.20.0-bookworm-slim@sha256:ba849c60be29959425b8734d57b8b4b7d56f98edd9504c9af091d5281095a71e 0.1s done
-#20 DONE 0.1s
+#22 [frontend dependencies 2/4] WORKDIR /app
+#22 CACHED
 
-#21 [migrate] exporting to image
-#21 exporting layers done
-#21 exporting manifest sha256:cd14840c707563357f5892b242c51c00628e7d9ebb4c5527a89b9e524ff8c09c 0.1s done
-#21 exporting config sha256:9ce6deaab2f8dac7bcbead6f2a6a8e7990b47db79f8b71d72c2edc6312f12364 0.1s done
-#21 exporting attestation manifest sha256:4d931da27c3368c4d2c3559fe474dc8e9ddfd2b0a775c6540dd064d23ddbf058 0.2s done
-#21 exporting manifest list sha256:b242a37502702771066235dceddf592e8afd6b7e80f8d642a4019e4297b1fa3a 0.1s done
-#21 naming to docker.io/library/omnimed-check-23f9b9ba7beb-migrate:latest 0.1s done
-#21 unpacking to docker.io/library/omnimed-check-23f9b9ba7beb-migrate:latest 0.0s done
-#21 DONE 0.6s
+#23 [frontend runner 5/5] COPY --from=builder --chown=node:node /app/public ./public
+#23 CACHED
 
-#22 [backend] exporting to image
-#22 exporting layers done
-#22 exporting manifest sha256:db0f2a564df7e215ee31c2dd8b43c86144d59f00d6111e80fbc72480e6de474e 0.1s done
-#22 exporting config sha256:f3a2a4526739557d547c2910ab529da9a994c172f9bbbaeb54193d009df53861 0.1s done
-#22 exporting attestation manifest sha256:e8b1a0d43e2b850ead4fc0f04aa64e8098a4c5731a23f0d783d27ad47095e8ca 0.1s done
-#22 exporting manifest list sha256:2f1dee179a28c4911c1b157419a1dee65324500e96d5bb7bda8a75260e37e0eb 0.1s done
-#22 naming to docker.io/library/omnimed-check-23f9b9ba7beb-backend:latest 0.0s done
-#22 unpacking to docker.io/library/omnimed-check-23f9b9ba7beb-backend:latest 0.0s done
-#22 DONE 0.6s
+#24 [migrate stage-0 5/9] COPY backend ./backend
+#24 DONE 0.0s
 
-#19 [seed] exporting to image
-#19 exporting manifest list sha256:2d134d6bf48aa8f4403c2e9bfc793a280cfc5f9458aabef707cc0f5610c0ced2 0.1s done
-#19 naming to docker.io/library/omnimed-check-23f9b9ba7beb-seed:latest 0.0s done
-#19 unpacking to docker.io/library/omnimed-check-23f9b9ba7beb-seed:latest 0.0s done
-#19 DONE 0.7s
+#25 [backend stage-0 6/9] COPY db ./db
+#25 DONE 0.0s
 
-#23 [frontend internal] load build context
-#23 transferring context: 1.15kB done
-#23 DONE 0.0s
+#26 [frontend] exporting to image
+#26 exporting layers done
+#26 exporting manifest sha256:8633acf06fb41995567673b68a912c96c73bbef2e00b06861279f6cb52832433 done
+#26 exporting config sha256:24b9ea357a420590b5d7a8b5443ef9d8ea96bb12e6aeb8e075aaea7421be92c8 0.0s done
+#26 exporting attestation manifest sha256:13409b5b507b66948ef0cd842445963b5f104e918f5b103ec14d6531ff8aadc9 0.0s done
+#26 exporting manifest list sha256:c355188e5fc10b91891fecd89b3b3d36c861a1d3639ad978f5600aa4c6116532 0.0s done
+#26 naming to docker.io/library/omnimed-check-30ea1d074f93-frontend:latest
+#26 naming to docker.io/library/omnimed-check-30ea1d074f93-frontend:latest done
+#26 unpacking to docker.io/library/omnimed-check-30ea1d074f93-frontend:latest 0.0s done
+#26 DONE 0.1s
 
-#24 [frontend dependencies 3/4] COPY frontend/package.json frontend/package-lock.json ./
-#24 CACHED
+#27 [seed stage-0 7/9] COPY scripts/seed_demo.py ./scripts/seed_demo.py
+#27 DONE 0.0s
 
-#25 [frontend dependencies 4/4] RUN npm ci --no-audit --no-fund
-#25 CACHED
+#28 [migrate stage-0 8/9] COPY scripts/start_backend.py ./scripts/start_backend.py
+#28 DONE 0.0s
 
-#26 [frontend builder 2/2] RUN npm run build
-#26 CACHED
+#29 [frontend] resolving provenance for metadata file
+#29 DONE 0.0s
 
-#27 [frontend runner 3/5] COPY --from=builder --chown=node:node /app/.next/standalone ./
-#27 CACHED
+#30 [backend stage-0 9/9] RUN uv sync --frozen --no-dev --no-editable     && groupadd --gid 10001 omnimed     && useradd --uid 10001 --gid omnimed --no-create-home omnimed     && chown -R omnimed:omnimed /app
+#30 0.408 Using CPython 3.12.13 interpreter at: /usr/local/bin/python3
+#30 0.408 Creating virtual environment at: .venv
+#30 0.420    Building omnimed-poc @ file:///app
+#30 0.678 Downloading pydantic-core (2.0MiB)
+#30 0.678 Downloading sqlalchemy (3.2MiB)
+#30 0.679 Downloading psycopg-binary (5.0MiB)
+#30 2.216  Downloaded pydantic-core
+#30 2.259       Built omnimed-poc @ file:///app
+#30 2.599  Downloaded sqlalchemy
+#30 2.873  Downloaded psycopg-binary
+#30 2.873 Prepared 21 packages in 2.46s
+#30 2.913 Installed 21 packages in 39ms
+#30 3.614 Bytecode compiled 819 files in 700ms
+#30 3.614  + alembic==1.19.2
+#30 3.614  + annotated-doc==0.0.5
+#30 3.614  + annotated-types==0.8.0
+#30 3.614  + anyio==4.15.1
+#30 3.614  + click==8.5.0
+#30 3.614  + fastapi==0.141.1
+#30 3.614  + greenlet==3.5.5
+#30 3.614  + h11==0.16.0
+#30 3.614  + idna==3.19
+#30 3.614  + mako==1.4.1
+#30 3.614  + markupsafe==3.0.3
+#30 3.614  + omnimed-poc==0.1.0 (from file:///app)
+#30 3.614  + psycopg==3.3.5
+#30 3.614  + psycopg-binary==3.3.5
+#30 3.614  + pydantic==2.13.5
+#30 3.614  + pydantic-core==2.46.5
+#30 3.614  + sqlalchemy==2.0.52
+#30 3.614  + starlette==1.6.0
+#30 3.614  + typing-extensions==4.16.0
+#30 3.614  + typing-inspection==0.4.4
+#30 3.614  + uvicorn==0.52.4
+#30 DONE 4.6s
 
-#28 [frontend builder 1/2] COPY frontend/ ./
-#28 CACHED
+#31 [seed] exporting to image
+#31 exporting layers 2.4s done
+#31 exporting manifest sha256:4e1ddb89e6e8e0dbf5f8f71558986eef7c83e76f9a1dd896d923aab97e5ae580 0.0s done
+#31 exporting config sha256:8b6e90d86568a86c97b630c938cd5e59f69c7e41f2953849ea6ac1036d9be47e 0.0s done
+#31 exporting attestation manifest sha256:6a36553425d0b738a153e5eb06bf4666de65904de3048305a8698dfbea7166a1 0.1s done
+#31 exporting manifest list sha256:97232dd1908a941d65b9cf494a48c5e03f40140f6405c8fac48a609c0ba8de42
+#31 exporting manifest list sha256:97232dd1908a941d65b9cf494a48c5e03f40140f6405c8fac48a609c0ba8de42 0.1s done
+#31 naming to docker.io/library/omnimed-check-30ea1d074f93-seed:latest 0.0s done
+#31 unpacking to docker.io/library/omnimed-check-30ea1d074f93-seed:latest
+#31 unpacking to docker.io/library/omnimed-check-30ea1d074f93-seed:latest 0.9s done
+#31 DONE 3.7s
 
-#29 [frontend runner 4/5] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
-#29 CACHED
+#32 [backend] exporting to image
+#32 exporting layers 2.4s done
+#32 exporting manifest sha256:fb3f8398cbfd9333c11a13bd8421aacfff721a24ac15c0680e997adf008044f6 0.0s done
+#32 exporting config sha256:b8a67d2482bec86c793a8ed5bf7032978b977c99c2387ac8292739b39e67b120 0.1s done
+#32 exporting attestation manifest sha256:d1ba11a9f06b0aaf54ea1e77a448bcb9f07d46d4cff9aa905bbb958b20e4d87a 0.1s done
+#32 exporting manifest list sha256:da619258963cef80ca75713a0df0afa5e32fbc5b1d7573acacf1fd35de929ce4 0.1s done
+#32 naming to docker.io/library/omnimed-check-30ea1d074f93-backend:latest done
+#32 unpacking to docker.io/library/omnimed-check-30ea1d074f93-backend:latest 0.9s done
+#32 DONE 3.7s
 
-#30 [frontend dependencies 2/4] WORKDIR /app
-#30 CACHED
+#33 [migrate] exporting to image
+#33 exporting layers 2.4s done
+#33 exporting manifest sha256:d1eee57074321161b27983db04c13a258d4aa89a19481eefb1779b74f7bf5bee 0.0s done
+#33 exporting config sha256:37640c2fda412f4b838971f807704c4611d092bee58026cd74df25d7777a9f5b 0.1s done
+#33 exporting attestation manifest sha256:8cd8a45247945655cbd4326dafb666275955a3b905ff647b936f1ccf13bcea02 0.1s done
+#33 exporting manifest list sha256:0ecac817162580a57ecb271ce95ada90ae2d594dbebe86382e35bf6434166ed4 0.1s done
+#33 naming to docker.io/library/omnimed-check-30ea1d074f93-migrate:latest done
+#33 unpacking to docker.io/library/omnimed-check-30ea1d074f93-migrate:latest 0.9s done
+#33 DONE 3.7s
 
-#31 [frontend runner 5/5] COPY --from=builder --chown=node:node /app/public ./public
-#31 CACHED
-
-#32 [frontend] exporting to image
-#32 exporting layers done
-#32 exporting manifest sha256:10d92be0662197673e215bb6ea0b024498481a5d2dc6855da5c964ef074c964c 0.1s done
-#32 exporting config sha256:92404940b6653875ae4d050cd9a56f11bc105d941bf7406d09b1e146924bbcde
-#32 exporting config sha256:92404940b6653875ae4d050cd9a56f11bc105d941bf7406d09b1e146924bbcde 0.0s done
-#32 exporting attestation manifest sha256:05cba125273f158404aaf8aa6953a48fa3874ae571ea86bd12c92e574d370176 0.1s done
-#32 exporting manifest list sha256:5ccd486b9cc637bcbced5bd3b9bd8db590a758c65f5c6f07f62d5a80ee4ab932
-#32 exporting manifest list sha256:5ccd486b9cc637bcbced5bd3b9bd8db590a758c65f5c6f07f62d5a80ee4ab932 0.0s done
-#32 naming to docker.io/library/omnimed-check-23f9b9ba7beb-frontend:latest done
-#32 unpacking to docker.io/library/omnimed-check-23f9b9ba7beb-frontend:latest 0.0s done
-#32 DONE 0.4s
-
-#33 [backend] resolving provenance for metadata file
-#33 DONE 0.1s
-
-#34 [frontend] resolving provenance for metadata file
+#34 [backend] resolving provenance for metadata file
 #34 DONE 0.1s
 
-#35 [migrate] resolving provenance for metadata file
+#35 [seed] resolving provenance for metadata file
 #35 DONE 0.1s
 
-#36 [seed] resolving provenance for metadata file
+#36 [migrate] resolving provenance for metadata file
 #36 DONE 0.0s
- omnimed-check-23f9b9ba7beb-migrate  Built
- omnimed-check-23f9b9ba7beb-seed  Built
- omnimed-check-23f9b9ba7beb-backend  Built
- omnimed-check-23f9b9ba7beb-frontend  Built
- Network omnimed-check-23f9b9ba7beb_default  Creating
- Network omnimed-check-23f9b9ba7beb_default  Created
- Volume omnimed-check-23f9b9ba7beb_omnimed_data  Creating
- Volume omnimed-check-23f9b9ba7beb_omnimed_data  Created
- Container omnimed-check-23f9b9ba7beb-db-1  Creating
- Container omnimed-check-23f9b9ba7beb-db-1  Created
- Container omnimed-check-23f9b9ba7beb-migrate-1  Creating
- Container omnimed-check-23f9b9ba7beb-migrate-1  Created
- Container omnimed-check-23f9b9ba7beb-seed-1  Creating
- Container omnimed-check-23f9b9ba7beb-seed-1  Created
- Container omnimed-check-23f9b9ba7beb-backend-1  Creating
- Container omnimed-check-23f9b9ba7beb-backend-1  Created
- Container omnimed-check-23f9b9ba7beb-frontend-1  Creating
- Container omnimed-check-23f9b9ba7beb-frontend-1  Created
- Container omnimed-check-23f9b9ba7beb-db-1  Starting
- Container omnimed-check-23f9b9ba7beb-db-1  Started
- Container omnimed-check-23f9b9ba7beb-db-1  Waiting
- Container omnimed-check-23f9b9ba7beb-db-1  Healthy
- Container omnimed-check-23f9b9ba7beb-migrate-1  Starting
- Container omnimed-check-23f9b9ba7beb-migrate-1  Started
- Container omnimed-check-23f9b9ba7beb-migrate-1  Waiting
- Container omnimed-check-23f9b9ba7beb-migrate-1  Exited
- Container omnimed-check-23f9b9ba7beb-seed-1  Starting
- Container omnimed-check-23f9b9ba7beb-seed-1  Started
- Container omnimed-check-23f9b9ba7beb-seed-1  Waiting
- Container omnimed-check-23f9b9ba7beb-seed-1  Exited
- Container omnimed-check-23f9b9ba7beb-backend-1  Starting
- Container omnimed-check-23f9b9ba7beb-backend-1  Started
- Container omnimed-check-23f9b9ba7beb-backend-1  Waiting
- Container omnimed-check-23f9b9ba7beb-backend-1  Healthy
- Container omnimed-check-23f9b9ba7beb-frontend-1  Starting
- Container omnimed-check-23f9b9ba7beb-frontend-1  Started
- Container omnimed-check-23f9b9ba7beb-backend-1  Waiting
- Container omnimed-check-23f9b9ba7beb-frontend-1  Waiting
- Container omnimed-check-23f9b9ba7beb-db-1  Waiting
- Container omnimed-check-23f9b9ba7beb-migrate-1  Waiting
- Container omnimed-check-23f9b9ba7beb-seed-1  Waiting
- Container omnimed-check-23f9b9ba7beb-backend-1  Healthy
- Container omnimed-check-23f9b9ba7beb-db-1  Healthy
- Container omnimed-check-23f9b9ba7beb-seed-1  Exited
- Container omnimed-check-23f9b9ba7beb-migrate-1  Exited
- Container omnimed-check-23f9b9ba7beb-frontend-1  Healthy
+ omnimed-check-30ea1d074f93-migrate  Built
+ omnimed-check-30ea1d074f93-seed  Built
+ omnimed-check-30ea1d074f93-backend  Built
+ omnimed-check-30ea1d074f93-frontend  Built
+ Network omnimed-check-30ea1d074f93_default  Creating
+ Network omnimed-check-30ea1d074f93_default  Created
+ Volume omnimed-check-30ea1d074f93_omnimed_data  Creating
+ Volume omnimed-check-30ea1d074f93_omnimed_data  Created
+ Container omnimed-check-30ea1d074f93-db-1  Creating
+ Container omnimed-check-30ea1d074f93-db-1  Created
+ Container omnimed-check-30ea1d074f93-migrate-1  Creating
+ Container omnimed-check-30ea1d074f93-migrate-1  Created
+ Container omnimed-check-30ea1d074f93-seed-1  Creating
+ Container omnimed-check-30ea1d074f93-seed-1  Created
+ Container omnimed-check-30ea1d074f93-backend-1  Creating
+ Container omnimed-check-30ea1d074f93-backend-1  Created
+ Container omnimed-check-30ea1d074f93-frontend-1  Creating
+ Container omnimed-check-30ea1d074f93-frontend-1  Created
+ Container omnimed-check-30ea1d074f93-db-1  Starting
+ Container omnimed-check-30ea1d074f93-db-1  Started
+ Container omnimed-check-30ea1d074f93-db-1  Waiting
+ Container omnimed-check-30ea1d074f93-db-1  Healthy
+ Container omnimed-check-30ea1d074f93-migrate-1  Starting
+ Container omnimed-check-30ea1d074f93-migrate-1  Started
+ Container omnimed-check-30ea1d074f93-migrate-1  Waiting
+ Container omnimed-check-30ea1d074f93-migrate-1  Exited
+ Container omnimed-check-30ea1d074f93-seed-1  Starting
+ Container omnimed-check-30ea1d074f93-seed-1  Started
+ Container omnimed-check-30ea1d074f93-seed-1  Waiting
+ Container omnimed-check-30ea1d074f93-seed-1  Exited
+ Container omnimed-check-30ea1d074f93-backend-1  Starting
+ Container omnimed-check-30ea1d074f93-backend-1  Started
+ Container omnimed-check-30ea1d074f93-backend-1  Waiting
+ Container omnimed-check-30ea1d074f93-backend-1  Healthy
+ Container omnimed-check-30ea1d074f93-frontend-1  Starting
+ Container omnimed-check-30ea1d074f93-frontend-1  Started
+ Container omnimed-check-30ea1d074f93-backend-1  Waiting
+ Container omnimed-check-30ea1d074f93-frontend-1  Waiting
+ Container omnimed-check-30ea1d074f93-db-1  Waiting
+ Container omnimed-check-30ea1d074f93-migrate-1  Waiting
+ Container omnimed-check-30ea1d074f93-seed-1  Waiting
+ Container omnimed-check-30ea1d074f93-db-1  Healthy
+ Container omnimed-check-30ea1d074f93-migrate-1  Exited
+ Container omnimed-check-30ea1d074f93-backend-1  Healthy
+ Container omnimed-check-30ea1d074f93-seed-1  Exited
+ Container omnimed-check-30ea1d074f93-frontend-1  Healthy
 PASS: image build, startup ordering, live and database readiness
 
 > omnimed-poc-frontend@0.1.0 test:e2e
@@ -220,11 +238,15 @@ PASS: image build, startup ordering, live and database readiness
 
 Running 3 tests using 1 worker
 
-  ✓  1 [chromium] › ..\tests\e2e\foundation.spec.ts:3:5 › role preview changes worklists, never enables clinical write actions (769ms)
-  ✓  2 [chromium] › ..\tests\e2e\foundation.spec.ts:16:5 › keyboard, language and desktop layout remain usable (456ms)
-  ✓  3 [chromium] › ..\tests\e2e\foundation.spec.ts:30:5 › connection failure is shown honestly (417ms)
+(node:15276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › ..\tests\e2e\foundation.spec.ts:3:5 › role preview changes worklists, never enables clinical write actions (755ms)
+  ✓  2 [chromium] › ..\tests\e2e\foundation.spec.ts:16:5 › keyboard, language and desktop layout remain usable (427ms)
+  ✓  3 [chromium] › ..\tests\e2e\foundation.spec.ts:30:5 › connection failure is shown honestly (512ms)
 
-  3 passed (3.4s)
+  3 passed (3.6s)
 .                                                                        [100%]
 ============================== warnings summary ===============================
 .venv\Lib\site-packages\fastapi\testclient.py:1
@@ -236,33 +258,33 @@ Running 3 tests using 1 worker
     _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-1 passed, 2 warnings in 1.68s
+1 passed, 2 warnings in 2.13s
 PASS: live PostgreSQL migration up/down/up, drift, seed and constraints
 PASS: browser suite against built Compose frontend
- Container omnimed-check-23f9b9ba7beb-db-1  Stopping
- Container omnimed-check-23f9b9ba7beb-db-1  Stopped
- Container omnimed-check-23f9b9ba7beb-frontend-1  Stopping
- Container omnimed-check-23f9b9ba7beb-frontend-1  Stopped
- Container omnimed-check-23f9b9ba7beb-frontend-1  Removing
- Container omnimed-check-23f9b9ba7beb-frontend-1  Removed
- Container omnimed-check-23f9b9ba7beb-backend-1  Stopping
- Container omnimed-check-23f9b9ba7beb-backend-1  Stopped
- Container omnimed-check-23f9b9ba7beb-backend-1  Removing
- Container omnimed-check-23f9b9ba7beb-backend-1  Removed
- Container omnimed-check-23f9b9ba7beb-seed-1  Stopping
- Container omnimed-check-23f9b9ba7beb-seed-1  Stopped
- Container omnimed-check-23f9b9ba7beb-seed-1  Removing
- Container omnimed-check-23f9b9ba7beb-seed-1  Removed
- Container omnimed-check-23f9b9ba7beb-migrate-1  Stopping
- Container omnimed-check-23f9b9ba7beb-migrate-1  Stopped
- Container omnimed-check-23f9b9ba7beb-migrate-1  Removing
- Container omnimed-check-23f9b9ba7beb-migrate-1  Removed
- Container omnimed-check-23f9b9ba7beb-db-1  Stopping
- Container omnimed-check-23f9b9ba7beb-db-1  Stopped
- Container omnimed-check-23f9b9ba7beb-db-1  Removing
- Container omnimed-check-23f9b9ba7beb-db-1  Removed
- Network omnimed-check-23f9b9ba7beb_default  Removing
- Volume omnimed-check-23f9b9ba7beb_omnimed_data  Removing
- Volume omnimed-check-23f9b9ba7beb_omnimed_data  Removed
- Network omnimed-check-23f9b9ba7beb_default  Removed
+ Container omnimed-check-30ea1d074f93-db-1  Stopping
+ Container omnimed-check-30ea1d074f93-db-1  Stopped
+ Container omnimed-check-30ea1d074f93-frontend-1  Stopping
+ Container omnimed-check-30ea1d074f93-frontend-1  Stopped
+ Container omnimed-check-30ea1d074f93-frontend-1  Removing
+ Container omnimed-check-30ea1d074f93-frontend-1  Removed
+ Container omnimed-check-30ea1d074f93-backend-1  Stopping
+ Container omnimed-check-30ea1d074f93-backend-1  Stopped
+ Container omnimed-check-30ea1d074f93-backend-1  Removing
+ Container omnimed-check-30ea1d074f93-backend-1  Removed
+ Container omnimed-check-30ea1d074f93-seed-1  Stopping
+ Container omnimed-check-30ea1d074f93-seed-1  Stopped
+ Container omnimed-check-30ea1d074f93-seed-1  Removing
+ Container omnimed-check-30ea1d074f93-seed-1  Removed
+ Container omnimed-check-30ea1d074f93-migrate-1  Stopping
+ Container omnimed-check-30ea1d074f93-migrate-1  Stopped
+ Container omnimed-check-30ea1d074f93-migrate-1  Removing
+ Container omnimed-check-30ea1d074f93-migrate-1  Removed
+ Container omnimed-check-30ea1d074f93-db-1  Stopping
+ Container omnimed-check-30ea1d074f93-db-1  Stopped
+ Container omnimed-check-30ea1d074f93-db-1  Removing
+ Container omnimed-check-30ea1d074f93-db-1  Removed
+ Volume omnimed-check-30ea1d074f93_omnimed_data  Removing
+ Network omnimed-check-30ea1d074f93_default  Removing
+ Volume omnimed-check-30ea1d074f93_omnimed_data  Removed
+ Network omnimed-check-30ea1d074f93_default  Removed
 PASS: database outage gives live=200, ready/status=503

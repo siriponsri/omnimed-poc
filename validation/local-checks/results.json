@@ -10,7 +10,7 @@
       "scripts/backend_checks.py"
     ],
     "exit_code": 0,
-    "seconds": 5.42,
+    "seconds": 2.83,
     "evidence": "validation/local-checks/backend.txt"
   },
   {
@@ -22,7 +22,7 @@
       "lint"
     ],
     "exit_code": 0,
-    "seconds": 7.19,
+    "seconds": 3.55,
     "evidence": "validation/local-checks/frontend-lint.txt"
   },
   {
@@ -34,7 +34,7 @@
       "typecheck"
     ],
     "exit_code": 0,
-    "seconds": 1.74,
+    "seconds": 1.72,
     "evidence": "validation/local-checks/frontend-typecheck.txt"
   },
   {
@@ -45,7 +45,7 @@
       "test"
     ],
     "exit_code": 0,
-    "seconds": 0.88,
+    "seconds": 0.61,
     "evidence": "validation/local-checks/frontend-unit.txt"
   },
   {
@@ -57,7 +57,7 @@
       "build"
     ],
     "exit_code": 0,
-    "seconds": 60.23,
+    "seconds": 22.83,
     "evidence": "validation/local-checks/frontend-build.txt"
   },
   {
@@ -72,7 +72,7 @@
       "-q"
     ],
     "exit_code": 0,
-    "seconds": 1.02,
+    "seconds": 0.88,
     "evidence": "validation/local-checks/control-plane.txt"
   },
   {
@@ -88,7 +88,7 @@
       "tests/tooling"
     ],
     "exit_code": 0,
-    "seconds": 0.14,
+    "seconds": 0.06,
     "evidence": "validation/local-checks/tooling-lint.txt"
   },
   {
@@ -105,7 +105,7 @@
       "tests/tooling"
     ],
     "exit_code": 0,
-    "seconds": 0.27,
+    "seconds": 0.05,
     "evidence": "validation/local-checks/tooling-format.txt"
   },
   {
@@ -116,7 +116,7 @@
       "scripts/repository_check.py"
     ],
     "exit_code": 0,
-    "seconds": 9.95,
+    "seconds": 8.31,
     "evidence": "validation/local-checks/trace-and-package.txt"
   },
   {
@@ -127,7 +127,7 @@
       "scripts/compose_smoke.py"
     ],
     "exit_code": 0,
-    "seconds": 49.09,
+    "seconds": 88.5,
     "evidence": "validation/local-checks/compose-runtime-postgres-browser.txt"
   }
 ]

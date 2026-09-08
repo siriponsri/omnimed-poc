@@ -1,9 +1,9 @@
 + python -m ruff check backend db scripts/backend_checks.py scripts/seed_demo.py scripts/start_backend.py
 All checks passed!
 + python -m ruff format --check backend db scripts/backend_checks.py scripts/seed_demo.py scripts/start_backend.py
-20 files already formatted
+24 files already formatted
 + python -m mypy
-Success: no issues found in 8 source files
+Success: no issues found in 11 source files
 + python -m pytest backend/tests -q
 s...........................................                             [100%]
 ============================== warnings summary ===============================
@@ -16,4 +16,4 @@ s...........................................                             [100%]
     _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-43 passed, 1 skipped, 2 warnings in 1.50s
+43 passed, 1 skipped, 2 warnings in 1.05s
