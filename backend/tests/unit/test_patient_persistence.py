@@ -1,6 +1,4 @@
-from sqlalchemy import inspect
-
-from app.patients.models import Patient, PatientIdentifier, PartyRelation
+from app.patients.models import PartyRelation, Patient, PatientIdentifier
 
 
 def test_patient_tables_define_tenant_scoped_invariants() -> None:
@@ -9,7 +7,7 @@ def test_patient_tables_define_tenant_scoped_invariants() -> None:
         "uq_patient_tenant_id",
         "uq_patient_tenant_party",
     }
-    fks = list(inspect(PartyRelation).foreign_key_constraints)
+    fks = list(PartyRelation.__table__.foreign_key_constraints)
     assert {fk.name for fk in fks} == {
         "fk_party_relation_party",
         "fk_party_relation_related_party",
